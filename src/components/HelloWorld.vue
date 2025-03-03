@@ -3,8 +3,10 @@
 </script>
 
 <template>
-  <div>
-    three.js 学习路径
+  <div class="flex justify-center items-center h-full">
+    <div>
+      three.js 学习路径
+    </div>
   </div>
 </template>
 

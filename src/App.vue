@@ -15,7 +15,7 @@ const menuList = shares.menuList;
 
 <template>
   <div class="flex h-vh">
-    <div class="w-fit h-full">
+    <div class="w-fit h-full border-r border-gray-200">
         <!-- 菜单 -->
         <t-menu
           v-model:value="activeTab"
