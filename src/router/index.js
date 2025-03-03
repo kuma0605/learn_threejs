@@ -17,6 +17,18 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
     },
+    {
+      path:'/fundamental',
+      name: '基本',
+      component: () => import('../views/CommonView.vue'),
+      children: [
+        {
+          path:'/JiChu',
+          name: '基础',
+          component: () => import('../views/fundamental/JiChu.vue'),
+        }
+      ]
+    }
   ],
 })
 
