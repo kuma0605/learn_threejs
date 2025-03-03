@@ -23,7 +23,7 @@ const router = createRouter({
       component: () => import('../views/CommonView.vue'),
       children: [
         {
-          path:'/JiChu',
+          path:'JiChu',
           name: '基础',
           component: () => import('../views/fundamental/JiChu.vue'),
         }
