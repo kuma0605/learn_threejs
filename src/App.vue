@@ -18,6 +18,14 @@ function main() {
   // 一个场景(Scene)
   const scene = new THREE.Scene()
 
+  {
+    const color = 0xffffff
+    const intensity = 3
+    const light = new THREE.DirectionalLight(color, intensity)
+    light.position.set(-1, 2, 4)
+    scene.add(light)
+  }
+
   // 一个包含盒子信息的立方几何体(BoxGeometry)
   const boxWidth = 1
   const boxHeight = 1
@@ -25,7 +33,7 @@ function main() {
   const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth)
 
   // 创建一个基本的材质并设置它的颜色
-  const material = new THREE.MeshBasicMaterial({ color: 0x44aa88 })
+  const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 })
 
   // 创建一个网格(Mesh)对象
   const cube = new THREE.Mesh(geometry, material)
