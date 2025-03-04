@@ -30,7 +30,7 @@ function main() {
   const boxDepth = 1
   const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth)
 
-  // 创建一个基本的材质并设置它的颜色
+  /* // 创建一个基本的材质并设置它的颜色
   const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 })
 
   // 创建一个网格(Mesh)对象
@@ -39,15 +39,39 @@ function main() {
   // 最后我们将网格添加到场景中。
   scene.add(cube)
   // 之后将场景和摄像机传递给渲染器来渲染出整个场景。
-  // renderer.render(scene, camera);
+  // renderer.render(scene, camera); */
+
+  function makeInstance(geometry, color, x) {
+    const material = new THREE.MeshPhongMaterial({ color })
+
+    const cube = new THREE.Mesh(geometry, material)
+    scene.add(cube)
+
+    cube.position.x = x
+
+    return cube
+  }
+
+  const cubes = [
+    makeInstance(geometry, 0x44aa88, 0),
+    makeInstance(geometry, 0x8844aa, -2),
+    makeInstance(geometry, 0xaa8844, 2),
+  ]
 
   function render(time) {
     // requestAnimationFrame会将页面开始加载到函数运行所经历的时间当作入参传给回调函数，单位是毫秒数
     console.log(time)
     time *= 0.001 // convert time to seconds
 
-    cube.rotation.x = time
-    cube.rotation.y = time
+    /* cube.rotation.x = time
+    cube.rotation.y = time */
+
+    cubes.forEach((cube, ndx) => {
+      const speed = 1 + ndx * 0.1
+      const rot = time * speed
+      cube.rotation.x = rot
+      cube.rotation.y = rot
+    })
 
     renderer.render(scene, camera)
 
@@ -61,5 +85,5 @@ onMounted(() => {
 })
 </script>
 <template>
-    <canvas id="c"></canvas>
-  </template>
+  <canvas id="c"></canvas>
+</template>
