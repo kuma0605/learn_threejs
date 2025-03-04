@@ -26,6 +26,11 @@ const router = createRouter({
           path:'JiChu',
           name: '基础',
           component: () => import('../views/fundamental/JiChu.vue'),
+        },
+        {
+          path:'ZhiHuTutorial',
+          name: '知乎入门',
+          component: () => import('../views/fundamental/ZhiHuTutorial.vue'),
         }
       ]
     }

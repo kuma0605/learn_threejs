@@ -17,6 +17,12 @@ export const useShareStore = defineStore('share', () => {
           name: '基础',
           router:'/fundamental/JiChu',
         },
+        {
+          enable: true,
+          id: 'ZhiHuTutorial',
+          name: '知乎入门',
+          router:'/fundamental/ZhiHuTutorial',
+        },
       ],
     },
   ])

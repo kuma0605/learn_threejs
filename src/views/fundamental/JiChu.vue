@@ -58,10 +58,28 @@ function main() {
     makeInstance(geometry, 0xaa8844, 2),
   ]
 
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement
+    const pixelRatio = window.devicePixelRatio
+    const width = Math.floor(canvas.clientWidth * pixelRatio)
+    const height = Math.floor(canvas.clientHeight * pixelRatio)
+    const needResize = canvas.width !== width || canvas.height !== height
+    if (needResize) {
+      renderer.setSize(width, height, false)
+    }
+    return needResize
+  }
+
   function render(time) {
     // requestAnimationFrame会将页面开始加载到函数运行所经历的时间当作入参传给回调函数，单位是毫秒数
     console.log(time)
     time *= 0.001 // convert time to seconds
+
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement
+      camera.aspect = canvas.clientWidth / canvas.clientHeight
+      camera.updateProjectionMatrix()
+    }
 
     /* cube.rotation.x = time
     cube.rotation.y = time */
@@ -85,5 +103,5 @@ onMounted(() => {
 })
 </script>
 <template>
-  <canvas id="c"></canvas>
+  <canvas id="c" class="w-full h-full"></canvas>
 </template>
