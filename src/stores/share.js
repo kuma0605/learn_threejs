@@ -25,6 +25,19 @@ export const useShareStore = defineStore('share', () => {
         },
       ],
     },
+    {
+      enable: true,
+      id: 'basic',
+      name: '基础',
+      children: [
+        {
+          enable: true,
+          id: 'scene',
+          name: '场景图',
+          router:'/basic/scene',
+        },
+      ],
+    },
   ])
   const resourceTree = ref(JSON.parse(localStorage.getItem('resourceTree')) || {})
   const listTypeMap = reactive({})

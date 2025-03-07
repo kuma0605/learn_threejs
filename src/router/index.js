@@ -33,6 +33,19 @@ const router = createRouter({
           component: () => import('../views/fundamental/ZhiHuTutorial.vue'),
         }
       ]
+    },
+    {
+      path:'/basic',
+      name: '基础',
+      component: () => import('../views/CommonView.vue'),
+      children: [
+        {
+          path:'scene',
+          name: '场景图',
+          component: () => import('../views/basic/scene.vue'),
+        },
+        
+      ]
     }
   ],
 })
