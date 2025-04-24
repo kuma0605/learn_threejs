@@ -43,17 +43,6 @@ onMounted(() => {
   //   第五步：创建一个场景
   //   场景(Scene)是three.js的基本的组成部分。需要three.js绘制的东西都需要加入到scene中。
   const scene = new THREE.Scene()
-  //   然后创建一个包含盒子信息的立方几何体(BoxGeometry)。
-  const boxWidth = 1
-  const boxHeight = 1
-  const boxDepth = 1
-  const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth)
-  //   然后创建一个基本的材质并设置它的颜色. 颜色的值可以用css方式和十六进制来表示。
-  const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 })
-  //   然后创建一个网格(Mesh)，它是几何体和材质的组合。
-  const cube = new THREE.Mesh(geometry, material)
-  //   最后我们将网格添加到场景中。
-  scene.add(cube)
 
   //   添加些光照效果
   {
@@ -63,6 +52,34 @@ onMounted(() => {
     light.position.set(-1, 2, 4)
     scene.add(light)
   }
+  //   然后创建一个包含盒子信息的立方几何体(BoxGeometry)。
+  const boxWidth = 1
+  const boxHeight = 1
+  const boxDepth = 1
+  const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth)
+  /* //   然后创建一个基本的材质并设置它的颜色. 颜色的值可以用css方式和十六进制来表示。
+  const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 })
+  //   然后创建一个网格(Mesh)，它是几何体和材质的组合。
+  const cube = new THREE.Mesh(geometry, material)
+  //   最后我们将网格添加到场景中。
+  scene.add(cube) */
+
+  function makeInstance(geometry, color, x) {
+    const material = new THREE.MeshPhongMaterial({ color })
+
+    const cube = new THREE.Mesh(geometry, material)
+    scene.add(cube)
+
+    cube.position.x = x
+
+    return cube
+  }
+
+  const cubes = [
+    makeInstance(geometry, 0x44aa88, 0),
+    makeInstance(geometry, 0x8844aa, -2),
+    makeInstance(geometry, 0xaa8844, 2),
+  ]
 
   //   之后将场景和摄像机传递给渲染器来渲染出整个场景。
   renderer.render(scene, camera)
@@ -70,8 +87,15 @@ onMounted(() => {
   function render(time) {
     time *= 0.001 // 将时间单位变为秒
 
-    cube.rotation.x = time
-    cube.rotation.y = time
+    //    cube.rotation.x = time
+    //    cube.rotation.y = time
+
+    cubes.forEach((cube, ndx) => {
+      const speed = 1 + ndx * 0.1
+      const rot = time * speed
+      cube.rotation.x = rot
+      cube.rotation.y = rot
+    })
 
     renderer.render(scene, camera)
 
